@@ -35,7 +35,7 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('front-end/css/main.css')}}">
 <!--===============================================================================================-->
 </head>
-<body class="animsition">
+<body class="animsition" id="body">
 	
 	<!-- Header -->
 	@if ($title === 'Home')
@@ -71,15 +71,15 @@
 							</li> -->
 
 							<li>
-								<a href="./blog">Blog</a>
+								<a href="{{ route('blog.index')}}">Blog</a>
 							</li>
 
 							<li>
-								<a href="./about">About</a>
+								<a href="{{ route('about.index')}}">About</a>
 							</li>
 
 							<li>
-								<a href="./contact">Contact</a>
+								<a href="{{ route('contact.index')}}">Contact</a>
 							</li>
 						</ul>
 					</div>	

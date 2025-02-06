@@ -115,31 +115,65 @@
 							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 							<div class="slick3 gallery-lb">
-								<div class="item-slick3" data-thumb="{{asset('storage/'.$data->foto1)}}">
-									<div class="wrap-pic-w pos-relative">
-										<img src="{{asset('storage/'.$data->foto1)}}" alt="IMG-PRODUCT">
 
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{asset('front-end/images/product-detail-01.jpg')}}">
+								<div class="item-slick3" data-thumb="@if ($data->foto1 == null)
+									{{asset('img/no.jpg')}}
+								@else
+									{{asset('storage/'.$data->foto1)}}
+								@endif">
+
+									<div class="wrap-pic-w pos-relative">
+										<img src="@if ($data->foto1 == null)
+									{{asset('img/no.jpg')}}"
+								@else
+									{{asset('storage/'.$data->foto1)}}
+								@endif" alt="{{$data->foto1}}">
+										
+
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" 
+										href="{{asset('storage/' . $data->foto1)}}">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
 								</div>
 
-								<div class="item-slick3" data-thumb="{{asset('storage/'.$data->foto2)}}">
-									<div class="wrap-pic-w pos-relative">
-										<img src="{{asset('storage/'.$data->foto2)}}" alt="IMG-PRODUCT">
+								<div class="item-slick3" data-thumb="@if ($data->foto2 == null)
+									{{asset('img/no.jpg')}}
+								@else
+									{{asset('storage/'.$data->foto2)}}
+								@endif">
 
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{asset('front-end/images/product-detail-02.jpg')}}">
+									<div class="wrap-pic-w pos-relative">
+										<img src="@if ($data->foto2 == null)
+									{{asset('img/no.jpg')}}"
+								@else
+									{{asset('storage/'.$data->foto2)}}
+								@endif" alt="{{$data->foto2}}">
+										
+
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" 
+										href="{{asset('storage/' . $data->foto2)}}">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
 								</div>
 
-								<div class="item-slick3" data-thumb="{{asset('storage/'.$data->foto3)}}">
-									<div class="wrap-pic-w pos-relative">
-										<img src="{{asset('storage/'.$data->foto3)}}" alt="IMG-PRODUCT">
+								<div class="item-slick3" data-thumb="@if ($data->foto3 == null)
+									{{asset('img/no.jpg')}}
+								@else
+									{{asset('storage/'.$data->foto3)}}
+								@endif">
 
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{asset('front-end/images/product-detail-03.jpg')}}">
+									<div class="wrap-pic-w pos-relative">
+										<img src="@if ($data->foto3 == null)
+									{{asset('img/no.jpg')}}"
+								@else
+									{{asset('storage/'.$data->foto3)}}
+								@endif" alt="{{$data->foto3}}">
+										
+
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" 
+										href="{{asset('storage/' . $data->foto3)}}">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
@@ -162,6 +196,7 @@
 						<p class="mtext-106 cl2">
 							stock ({{$data->stok}})
 						</p>
+
 						<p class="stext-102 cl3 p-t-23">
                             @if(strlen($data->deskripsi) )
 								{{substr($data->deskripsi, 0, 100)}}
@@ -210,28 +245,36 @@
 
 							<div class="flex-w flex-r-m p-b-10">
 								<input type="hidden" value="{{$data->stok}}" id="stok">
-								<form action="" method="" name="frmkeranjang"></form>
-								<div class="size-204 flex-w flex-m respon6-next">
-									<div class="wrap-num-product flex-w m-r-20 m-tb-10">
+								<form action="{{ route('keranjang.store')}}" method="POST" name="frmkeranjang">
+									@csrf
 
-										<button type="button" class="btn btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" id="btnmin">
-											<i class="fs-16 zmdi zmdi-minus"></i>
-										</button>
+									<p class="mtext-106 cl2 pt-1" id="total">
 
-										<input class="mtext-104 cl3 txt-center num-product" type="text" name="num-product" value="1" id="jumlah_order" readonly>
+									</p>
+									<div class="size-204 flex-w flex-m respon6-next">
+										<div class="wrap-num-product flex-w m-r-20 m-tb-10">
 
-										<button type=button class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" id="btnplus">
-											<i class="fs-16 zmdi zmdi-plus"></i>
+											<button type="button" class="btn btn-num-product-down cl8 
+											hov-btn3 trans-04 flex-c-m" id="btnmin">
+												<i class="fs-16 zmdi zmdi-minus"></i>
+											</button>
+
+											<input class="mtext-104 cl3 txt-center num-product" type="text" name="jumlah_order" value="1" id="jumlah" readonly>
+
+											<button type=button class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" id="btnplus">
+												<i class="fs-16 zmdi zmdi-plus"></i>
+											</button>
+										</div>
+										<input type="text" name="id_pelanggan" id="id_pelanggan">
+										<input type="hidden" name="id_pakaian" id="id_pakaian" value="{{$data->id}}">
+										<input type="hidden" name="harga_sewa" id="harga_sewa" value="{{$data->harga_sewa}}">
+										<input type="hidden" name="subtotal" id="subtotal" value="0">
+										<input type="hidden" name="id_pelanggan" id="subtotal" value="1">
+										<button type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+											Add to cart
 										</button>
 									</div>
-									<input type="text" name="id_pelanggan" id="id_pelanggan">
-									<input type="text" name="id_pakaian" id="id_pakaian" value="{{$data->id}}">
-									<input type="text" name="harga_sewa" id="harga_sewa" value="{{$data->harga_sewa}}">
-									<input type="text" name="subtotal" id="subtotal" value="{{$data->subtotal}}">
-									<button type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-										Add to cart
-									</button>
-								</div>
+								</form>
 							</div>	
 						</div>
 
@@ -449,15 +492,33 @@
 	<script>
 		let jumlah = document.getElementById('jumlah')
 		let stok = document.getElementById('stok')
+		let body = document.getElementById('body')
+		let total = document.getElementById('total')
+		let subtotal = document.getElementById('subtotal')
+		let harga_sewa = document.getElementById('harga_sewa')
 		const btnplus = document.getElementById('btnplus')
 		const btnmin = document.getElementById('btnmin')
+
+		body.onload = function(){
+			total_sewa()
+		}
 
 		btnplus.onclick=function(){
 			if(parseInt(jumlah.value) < parseInt(stok.value)) 
 				jumlah.value = parseInt(jumlah.value) + 1
+				total_sewa()
 			}
 
 		btnmin.onclick=function(){
 				if(jumlah.value != 0) jumlah.value -= 1
+				total_sewa()
 			}
+
+
+	
+		function total_sewa(){
+			total.innerHTML = "Biaya sewa " + (parseInt(harga_sewa.value) * parseInt(jumlah.value)).toLocaleString("id", 
+				{style: "currency" , currency: "IDR", minimumFractionDigits: 0, maximumFractionDigits: 0,})
+				subtotal.value = parseInt(harga_sewa.value) * parseInt(jumlah.value)
+		}
 	</script>

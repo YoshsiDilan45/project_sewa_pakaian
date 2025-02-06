@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Keranjangs;
 use Illuminate\Http\Request;
 
 class KeranjangController extends Controller
@@ -34,7 +34,15 @@ class KeranjangController extends Controller
      */
     public function store(Request $request)
     {
-        return "<H1>SIMPAN KERANJANG</H1>";
+        $data = $request->only([
+            'id_pelanggan', 'id_pakaian', 'jumlah_order', 'subtotal'
+        ]);
+        Keranjangs::create($data);
+
+        return view('shoping-cart.index', [
+            'title' => 'Shoping Cart',
+        ]);
+        
     }
 
     /**

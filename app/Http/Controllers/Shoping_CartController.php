@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Keranjangs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Shoping_CartController extends Controller
 {
@@ -13,6 +15,7 @@ class Shoping_CartController extends Controller
      */
     public function index()
     {
+        $cart = DB::table('keranjangs')->where('id_pelanggan', 1);
         return view('shoping-cart.index', [
             'title' => 'Shoping Cart'
         ]);

@@ -44,7 +44,7 @@ class ProductDetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(string $id)
     {
         return view('product-detail.show', [
             'title' => "Product Detail",

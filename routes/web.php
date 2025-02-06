@@ -42,6 +42,7 @@ route::resource('payment_method', App\Http\Controllers\Payment_MethodController:
 route::resource('clothes', App\Http\Controllers\ClothesController::class );
 route::resource('orders', App\Http\Controllers\OrdersController::class );
 route::resource('product-detail', App\Http\Controllers\ProductDetailController::class );
+route::resource('keranjang', App\Http\Controllers\KeranjangController::class );
 // //  jika user belum login
 // Route::group(['middleware' => 'guest'], function() {
 //     Route::get('/', [AuthController::class, 'login'])->name('auth');
